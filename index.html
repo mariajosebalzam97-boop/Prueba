@@ -3,317 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Calculadora de Créditos Colombia (V2.0)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>MABA | Bolsos de Mujer en Barranquilla</title>
+    <!-- Tailwind CSS para diseño moderno y rápido -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display para títulos y Inter para texto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
         body {
-            background-color: #0f172a;
-            color: #f1f5f9;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7; /* Arena claro */
         }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: #1e293b;
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid #334155;
+        .font-serif {
+            font-family: 'Playfair Display', serif;
         }
-        header {
-            text-align: center;
-            margin-bottom: 35px;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 25px;
-        }
-        h1 { color: #38bdf8; font-size: 28px; margin-bottom: 8px; }
-        p.subtitle { color: #94a3b8; font-size: 14px; }
-        .badge {
-            background: #0284c7;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            vertical-align: middle;
-            margin-left: 8px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 35px;
-        }
-        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
-        .form-group {
-            margin-bottom: 22px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #94a3b8;
-            font-size: 14px;
-        }
-        input, select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #475569;
-            border-radius: 8px;
-            font-size: 15px;
-            background-color: #0f172a;
-            color: white;
-            transition: all 0.3s;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-        }
-        .results-box {
-            background-color: #0f172a;
-            border-radius: 12px;
-            padding: 25px;
-            border-top: 4px solid #38bdf8;
-        }
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid #334155;
-        }
-        .result-item:last-child { border-bottom: none; }
-        .result-label { font-weight: 500; color: #94a3b8; }
-        .result-value { font-weight: 700; color: #f8fafc; font-size: 18px; }
-        .highlight { color: #34d399; font-size: 22px; }
-        .info-card {
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-size: 13px;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-        .tabs-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            background: #0f172a;
-            padding: 6px;
-            border-radius: 8px;
-        }
-        .tab-btn {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #94a3b8;
-            padding: 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        .tab-btn.active {
-            background: #38bdf8;
-            color: #0f172a;
-        }
+        /* Color personalizado Terracota para CTAs */
+        .bg-terracota { background-color: #C07A5F; }
+        .bg-terracota:hover { background-color: #A6644B; }
+        .text-earth { color: #4A3E3D; }
+        .border-earth { border-color: #E6DFD3; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Simulador Multicrédito Colombiano <span class="badge">V2.0 PRO</span></h1>
-            <p class="subtitle">Simulación avanzada: Vivienda, Vehículo, Consumo y Tarjetas con tasas de usura y seguros estimados</p>
-        </header>
+<body class="text-gray-800 antialiased">
 
-        <div class="tabs-container">
-            <button class="tab-btn active" onclick="cambiarTipo('hipotecario')">🏠 Hipotecario / Leasing</button>
-            <button class="tab-btn" onclick="cambiarTipo('vehiculo')">🚗 Vehículo</button>
-            <button class="tab-btn" onclick="cambiarTipo('libre')">💰 Libre Inversión</button>
-            <button class="tab-btn" onclick="cambiarTipo('tarjeta')">💳 Tarjeta de Crédito</button>
-        </div>
-        
-        <div class="grid">
-            <div>
-                <div class="form-group">
-                    <label id="lblMonto" for="montoPrincipal">Monto Total del Crédito / Valor Inmueble ($ COP)</label>
-                    <input type="number" id="montoPrincipal" value="150000000" step="5000000">
-                </div>
-                
-                <div class="form-group" id="divCuotaInicial">
-                    <label for="cuotaInicial">Cuota Inicial ($ COP)</label>
-                    <input type="number" id="cuotaInicial" value="45000000" step="5000000">
-                </div>
-
-                <div class="form-group" id="divAmortizacion">
-                    <label for="tipoSistema">Modalidad de Moneda</label>
-                    <select id="tipoSistema">
-                        <option value="pesos">Pesos Colombianos (Cuota Fija)</option>
-                        <option value="uvr">UVR (Indexado a Inflación / IPC)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="tasaAnual">Tasa de Interés Nominal/Efectiva Propuesta (E.A. %)</label>
-                    <input type="number" id="tasaAnual" value="11.8" step="0.05">
-                </div>
-
-                <div class="form-group">
-                    <label id="lblPlazo" for="plazo">Plazo de Amortización (Meses)</label>
-                    <input type="number" id="plazo" value="180" min="1" max="360">
-                </div>
-
-                <div class="form-group">
-                    <label for="seguroMes">Seguro de Vida Obligatorio + Todo Riesgo Estimado (Mensual $ COP)</label>
-                    <input type="number" id="seguroMes" value="45000" step="5000">
-                </div>
-            </div>
-            
-            <div>
-                <h2 style="font-size: 18px; margin-bottom: 15px; color: #38bdf8;">Análisis Financiero del Escenario</h2>
-                <div class="results-box">
-                    <div class="result-item">
-                        <span class="result-label">Capital Neto a Financiar</span>
-                        <span class="result-value" id="resFinanciar">$ 0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Tasa Periódica Mes Vencido (M.V.)</span>
-                        <span class="result-value" id="resTasaMes">0.00%</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Cuota Base (Solo Capital + Interés)</span>
-                        <span class="result-value" id="resCuotaBase">$ 0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Seguros Mensuales Adicionados</span>
-                        <span class="result-value" id="resSeguro">$ 0</span>
-                    </div>
-                    <div class="result-item" style="background: rgba(52, 211, 153, 0.05); padding: 10px; border-radius: 6px;">
-                        <span class="result-label" style="color: #34d399; font-weight: 600;">CUOTA MENSUAL TOTAL</span>
-                        <span class="result-value highlight" id="resCuotaTotal">$ 0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Costo Total de Intereses Generados</span>
-                        <span class="result-value" id="resIntereses">$ 0</span>
-                    </div>
-                </div>
-                
-                <div class="info-card" id="infoDinamica">
-                    <strong>Análisis del Sistema:</strong> Los créditos hipotecarios en Colombia permiten plazos amplios y tasas competitivas. Recuerde validar si aplica a subsidios del gobierno (Mi Casa Ya / Cobertura FRECH).
-                </div>
-            </div>
-        </div>
+    <!-- BARRA DE ANUNCIO (Conversión) -->
+    <div class="bg-stone-900 text-white text-center py-2 text-xs uppercase tracking-widest font-medium">
+        Envíos rápidos en Barranquilla | Excelente calidad a precios asequibles
     </div>
 
-    <script>
-        let tipoCreditoActivo = 'hipotecario';
+    <!-- NAVBAR -->
+    <header class="border-b border-earth sticky top-0 bg-white/90 backdrop-blur-md z-50 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="text-3xl font-serif tracking-wider font-semibold text-earth">MABA</div>
+            <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-wider font-medium text-stone-600">
+                <a href="#inicio" class="hover:text-stone-950 transition">Inicio</a>
+                <a href="#beneficios" class="hover:text-stone-950 transition">Beneficios</a>
+                <a href="#coleccion" class="hover:text-stone-950 transition">Colección</a>
+                <a href="#contacto" class="hover:text-stone-950 transition">Contacto</a>
+            </nav>
+            <div>
+                <a href="https://wa.me/#" target="_blank" class="bg-stone-900 text-white px-5 py-2.5 text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition">
+                    Pedir por WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
 
-        function cambiarTipo(tipo) {
-            tipoCreditoActivo = tipo;
-            
-            // Actualizar botones de pestañas
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+    <main>
+        <!-- HERO SECTION (Estructura llamativa de impacto) -->
+        <section id="inicio" class="relative overflow-hidden min-h-[85vh] flex items-center balance-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-12">
+                
+                <!-- Texto Principal -->
+                <div class="lg:col-span-6 z-10 space-y-6 text-center lg:text-left">
+                    <span class="text-xs uppercase tracking-widest text-stone-500 font-semibold block">Estilo & Calidad en Curramba</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif text-earth leading-tight">
+                        El bolso perfecto para tu día a día, <span class="italic font-normal text-stone-500">sin pagar de más</span>.
+                    </h1>
+                    <p class="text-stone-600 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 font-light leading-relaxed">
+                        En MABA diseñamos bolsos modernos y duraderos para la mujer de Barranquilla. Diseños sobrios, sofisticados y pensados para tu ritmo de vida.
+                    </p>
+                    <div class="pt-4 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                        <a href="#coleccion" class="bg-terracota text-white px-8 py-4 text-sm uppercase tracking-widest font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 text-center">
+                            Ver Catálogo Actual
+                        </a>
+                        <a href="https://wa.me/#" target="_blank" class="border border-stone-400 text-stone-800 px-8 py-4 text-sm uppercase tracking-widest font-medium hover:bg-stone-100 transition text-center">
+                            Asesoría Inmediata
+                        </a>
+                    </div>
+                </div>
 
-            // Modificar visibilidad y valores sugeridos según la modalidad colombiana estándar
-            const divCuotaInicial = document.getElementById('divCuotaInicial');
-            const divAmortizacion = document.getElementById('divAmortizacion');
-            const lblMonto = document.getElementById('lblMonto');
-            const lblPlazo = document.getElementById('lblPlazo');
-            
-            if (tipo === 'hipotecario') {
-                lblMonto.textContent = "Valor del Inmueble ($ COP)";
-                lblPlazo.textContent = "Plazo de Amortización (Meses)";
-                divCuotaInicial.style.display = 'block';
-                divAmortizacion.style.display = 'block';
-                document.getElementById('montoPrincipal').value = "150000000";
-                document.getElementById('cuotaInicial').value = "45000000";
-                document.getElementById('tasaAnual').value = "11.5";
-                document.getElementById('plazo').value = "240";
-                document.getElementById('seguroMes').value = "55000";
-                document.getElementById('infoDinamica').innerHTML = "<strong>Análisis del Sistema:</strong> Financiamiento máx del 70% para vivienda NO VIS y 80% para VIS. Estabilidad a largo plazo mediante cuotas fijas en pesos.";
-            } else if (tipo === 'vehiculo') {
-                lblMonto.textContent = "Monto a Financiar el Vehículo ($ COP)";
-                lblPlazo.textContent = "Plazo de Amortización (Meses)";
-                divCuotaInicial.style.display = 'none';
-                divAmortizacion.style.display = 'none';
-                document.getElementById('montoPrincipal').value = "60000000";
-                document.getElementById('tasaAnual').value = "15.5";
-                document.getElementById('plazo').value = "72";
-                document.getElementById('seguroMes').value = "80000"; // Incluye póliza auto todo riesgo endosada
-                document.getElementById('infoDinamica').innerHTML = "<strong>Análisis del Sistema:</strong> El crédito de vehículo suele exigir pignoración del automotor. Las tasas varían si el carro es nuevo o usado.";
-            } else if (tipo === 'libre') {
-                lblMonto.textContent = "Monto del Crédito de Consumo ($ COP)";
-                lblPlazo.textContent = "Plazo Solicitado (Meses)";
-                divCuotaInicial.style.display = 'none';
-                divAmortizacion.style.display = 'none';
-                document.getElementById('montoPrincipal').value = "20000000";
-                document.getElementById('tasaAnual').value = "22.0";
-                document.getElementById('plazo').value = "48";
-                document.getElementById('seguroMes').value = "15000";
-                document.getElementById('infoDinamica').innerHTML = "<strong>Análisis del Sistema:</strong> Libre inversión/Consumo. Tasas más elevadas sujetas al perfil de riesgo. Alerta con la tasa de usura fijada por la Superfinanciera.";
-            } else if (tipo === 'tarjeta') {
-                lblMonto.textContent = "Cupo Utilizado / Avance / Compra ($ COP)";
-                lblPlazo.textContent = "Diferido a Cuotas (Meses)";
-                divCuotaInicial.style.display = 'none';
-                divAmortizacion.style.display = 'none';
-                document.getElementById('montoPrincipal').value = "5000000";
-                document.getElementById('tasaAnual').value = "28.5"; // Cercano a la usura habitual de tarjetas
-                document.getElementById('plazo').value = "24";
-                document.getElementById('seguroMes').value = "6000"; // Seguro de cartera común
-                document.getElementById('infoDinamica').innerHTML = "<strong>Análisis del Sistema:</strong> Compras diferidas a 1 sola cuota por lo general no generan intereses corrientes en Colombia. Evite los avances en efectivo debido a su alto costo inmediato.";
-            }
-            
-            calcularTodo();
-        }
+                <!-- Contenedor Visual (Composición asimétrica moderna) -->
+                <div class="lg:col-span-6 relative flex justify-center">
+                    <!-- Cuadro decorativo de fondo -->
+                    <div class="absolute inset-0 bg-[#EFEAE2] rounded-3xl transform rotate-3 scale-95 lg:scale-105 -z-10"></div>
+                    <!-- Simulación de imagen principal de alta calidad -->
+                    <div class="w-full max-w-md bg-stone-300 h-[450px] rounded-2xl overflow-hidden shadow-2xl relative group">
+                        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80" alt="Bolso MABA elegante" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-4 rounded-xl flex justify-between items-center">
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-stone-500">Más Vendido</p>
+                                <p class="font-serif text-earth font-medium">Tote Bag Terracota</p>
+                            </div>
+                            <span class="text-sm font-semibold text-terracota">$99.900 COP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        function calcularTodo() {
-            const montoPrincipal = parseFloat(document.getElementById('montoPrincipal').value) || 0;
-            const cuotaInicial = tipoCreditoActivo === 'hipotecario' ? (parseFloat(document.getElementById('cuotaInicial').value) || 0) : 0;
-            const tasaAnual = parseFloat(document.getElementById('tasaAnual').value) || 0;
-            const plazo = parseInt(document.getElementById('plazo').value) || 0;
-            const seguroMes = parseFloat(document.getElementById('seguroMes').value) || 0;
+        <!-- SECCIÓN BENEFICIOS (Rompe las objeciones de compra) -->
+        <section id="beneficios" class="py-16 bg-[#F5F0E6] border-y border-earth">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-4 space-y-2">
+                        <div class="text-2xl text-terracota mb-2">✦</div>
+                        <h3 class="font-serif text-lg text-earth font-medium">Precios Justos</h3>
+                        <p class="text-stone-600 text-sm font-light">Eliminamos los intermediarios para darte la mejor calidad de Barranquilla al precio correcto.</p>
+                    </div>
+                    <div class="p-4 space-y-2 md:border-x md:border-stone-300">
+                        <div class="text-2xl text-terracota mb-2">✦</div>
+                        <h3 class="font-serif text-lg text-earth font-medium">Calidad Premium</h3>
+                        <p class="text-stone-600 text-sm font-light">Materiales seleccionados y costuras reforzadas que garantizan que tu bolso luzca impecable por años.</p>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <div class="text-2xl text-terracota mb-2">✦</div>
+                        <h3 class="font-serif text-lg text-earth font-medium">Entrega Local</h3>
+                        <p class="text-stone-600 text-sm font-light">Recibe tu bolso en la puerta de tu casa u oficina en Barranquilla y Soledad de forma ágil.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            const capitalFinanciar = montoPrincipal - cuotaInicial;
-            document.getElementById('resFinanciar').textContent = '$ ' + capitalFinanciar.toLocaleString('es-CO');
+        <!-- COLECCIÓN DESTACADA (Grid Interactivo) -->
+        <section id="coleccion" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs uppercase tracking-widest text-stone-500 font-semibold">Diseños Atemporales</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif text-earth">Nuestra Colección</h2>
+                    <div class="w-12 h-[1px] bg-terracota mx-auto mt-4"></div>
+                </div>
 
-            if (capitalFinanciar <= 0 || plazo <= 0 || tasaAnual <= 0) {
-                document.getElementById('resCuotaBase').textContent = "$ 0";
-                document.getElementById('resCuotaTotal').textContent = "$ 0";
-                document.getElementById('resIntereses').textContent = "$ 0";
-                return;
-            }
+                <!-- Product Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    
+                    <!-- Tarjeta Producto 1 -->
+                    <div class="group space-y-4 bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="aspect-square bg-stone-100 rounded-lg overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=600&q=80" alt="Bolso MABA" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                            <span class="absolute top-3 left-3 bg-white text-xs px-2 py-1 uppercase tracking-wider text-stone-600 font-medium">Favorito</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-lg text-earth group-hover:text-terracota transition">Bolso Hombro Siena</h3>
+                                <p class="text-xs text-stone-500">Disponible en Café y Beige</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-base font-medium text-earth">$85.000</p>
+                                <p class="text-xs line-through text-stone-400">$120.000</p>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/#?text=Hola%20MABA,%20quiero%20el%20Bolso%20Hombro%20Siena" target="_blank" class="w-full bg-stone-900 text-white text-center py-3 text-xs uppercase tracking-widest font-medium block opacity-90 hover:opacity-100 transition rounded">
+                            Comprar por WhatsApp
+                        </a>
+                    </div>
 
-            // Convertir de Efectiva Anual (E.A) a Mensual Vencida (M.V)
-            const tasaMensual = Math.pow(1 + (tasaAnual / 100), 1 / 12) - 1;
-            document.getElementById('resTasaMes').textContent = (tasaMensual * 100).toFixed(2) + '%';
+                    <!-- Tarjeta Producto 2 -->
+                    <div class="group space-y-4 bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="aspect-square bg-stone-100 rounded-lg overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc15a6a0?auto=format&fit=crop&w=600&q=80" alt="Bolso MABA" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-lg text-earth group-hover:text-terracota transition">Cartera Clutch Arena</h3>
+                                <p class="text-xs text-stone-500">Ideal para eventos sociales</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-base font-medium text-earth">$75.000</p>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/#?text=Hola%20MABA,%20quiero%20la%20Cartera%20Clutch%20Arena" target="_blank" class="w-full bg-stone-900 text-white text-center py-3 text-xs uppercase tracking-widest font-medium block opacity-90 hover:opacity-100 transition rounded">
+                            Comprar por WhatsApp
+                        </a>
+                    </div>
 
-            // Cálculo de la cuota base usando amortización constante (sistema francés)
-            const cuotaBase = (capitalFinanciar * tasaMensual) / (1 - Math.pow(1 + tasaMensual, -plazo));
-            const cuotaTotal = cuotaBase + seguroMes;
-            const totalIntereses = (cuotaBase * plazo) - capitalFinanciar;
+                    <!-- Tarjeta Producto 3 -->
+                    <div class="group space-y-4 bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="aspect-square bg-stone-100 rounded-lg overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=600&q=80" alt="Bolso MABA" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                            <span class="absolute top-3 left-3 bg-amber-800 text-white text-xs px-2 py-1 uppercase tracking-wider font-medium">Últimos 3</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-lg text-earth group-hover:text-terracota transition">Maletín Ejecutivo Moka</h3>
+                                <p class="text-xs text-stone-500">Gran espacio y elegancia</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-base font-medium text-earth">$110.000</p>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/#?text=Hola%20MABA,%20quiero%20el%20Maletin%20Ejecutivo%20Moka" target="_blank" class="w-full bg-stone-900 text-white text-center py-3 text-xs uppercase tracking-widest font-medium block opacity-90 hover:opacity-100 transition rounded">
+                            Comprar por WhatsApp
+                        </a>
+                    </div>
 
-            document.getElementById('resCuotaBase').textContent = '$ ' + Math.round(cuotaBase).toLocaleString('es-CO');
-            document.getElementById('resSeguro').textContent = '$ ' + Math.round(seguroMes).toLocaleString('es-CO');
-            document.getElementById('resCuotaTotal').textContent = '$ ' + Math.round(cuotaTotal).toLocaleString('es-CO');
-            document.getElementById('resIntereses').textContent = '$ ' + Math.round(totalIntereses).toLocaleString('es-CO');
-        }
+                </div>
+            </div>
+        </section>
 
-        // Listener para recálculo dinámico en cualquier interacción
-        document.querySelectorAll('input, select').forEach(element => {
-            element.addEventListener('input', calcularTodo);
-        });
+        <!-- SECCIÓN DE CIERRE / CTA DE CONVERSIÓN -->
+        <section id="contacto" class="bg-[#EFEAE2] py-20 border-t border-earth text-center">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+                <h2 class="font-serif text-3xl sm:text-4xl text-earth">¿Buscas un diseño personalizado o compras al por mayor?</h2>
+                <p class="text-stone-600 max-w-lg mx-auto font-light">
+                    Hablamos directamente contigo por WhatsApp para mostrarte disponibilidad de colores, coordinar tu entrega contra entrega en Barranquilla o resolver tus dudas.
+                </p>
+                <div class="pt-4">
+                    <a href="https://wa.me/#" target="_blank" class="inline-flex items-center space-x-3 bg-terracota text-white px-8 py-4 text-sm uppercase tracking-widest font-medium shadow-lg hover:shadow-xl transition duration-300">
+                        <span>Chatear con una Asesora</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        // Inicialización en la carga original
-        calcularTodo();
-    </script>
+    <!-- FOOTER -->
+    <footer class="bg-stone-900 text-stone-400 py-12 text-sm text-center border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <div class="font-serif text-2xl text-white tracking-widest">MABA</div>
+            <p class="text-xs uppercase tracking-widest">Bolsos con Alma · Barranquilla, Colombia</p>
+            <div class="pt-6 border-t border-stone-800 text-xs text-stone-500">
+                &copy; 2026 MABA Store. Todos los derechos reservados. Diseñado para alta conversión.
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
